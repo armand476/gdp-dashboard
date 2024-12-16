@@ -4,7 +4,7 @@ import numpy as np
 st.markdown(
     """
     <div style="text-align: center; color:#00561b; font-size: 50px; font-weight: bold;">
-        Mon application
+        MEDICIA
     </div>
     """,
     unsafe_allow_html=True
@@ -41,7 +41,7 @@ st.markdown("<hr style='border:1px solid black;'>", unsafe_allow_html=True)
 st.markdown(
     """
     <div style="text-align: center;text-decoration:underline;font-size:20px;">
-        Description symptome :
+        Description plus profonde :
     </div>
     """,
     unsafe_allow_html=True
