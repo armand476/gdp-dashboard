@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
-import math
-from pathlib import Path
-
+import numpy as np
 st.markdown(
     """
     <div style="text-align: center; color:#00561b; font-size: 50px; font-weight: bold;">
@@ -13,25 +11,25 @@ st.markdown(
 )
 température = st.selectbox(
         "Température", 
-        options=list(range(
+        options= np.arange(35, 45, 0.1).tolist()
     )
 age = st.selectbox(
         "Age", 
-        options=list(range(
+        options=np.arange(0, 130, 1).tolist()
     )
 sat = st.selectbox(
         "Saturation en oxygéne", 
-        options=list(range(
+        options=np.arange(60, 100, 0.1).tolist()
     )
 cols=st.columns(2)
 with cols[0]:
     t1 = st.selectbox(
         "Tension systollique", 
-        options=list(range(
+        options=np.arange(10, 200, 1)
     )
 with cols[1]:
         
     t2 = st.selectbox(
         "Tension diastollique", 
-        options=list(range(
+        options=np.arange(10, 200, 1)
     )
