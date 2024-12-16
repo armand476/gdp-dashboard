@@ -35,6 +35,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-symptome= st.text_input("Symptome :")
-antécédents= st.text_input("Symptome :")
+symptome= st.text_input("Décrivez les symptomes du patient :")
+antécédents= st.text_input("Le patient a-t-il des traitements si oui lesquels ?")
    
