@@ -23,23 +23,6 @@ step=[1,1,1]
 min=[5,5,1]
 max=[50,300,400]
 
-image_url = "https://raw.githubusercontent.com/USERNAME/REPOSITORY/BRANCH/images/background.jpg"
-
-# Ajouter l'image en fond
-st.markdown(
-    f"""
-    <style>
-    div.stApp {{
-        background-image: url("{image_url}");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 st.markdown(
     """
     <div style="text-align: center; color:#00561b; font-size: 50px; font-weight: bold;">
@@ -109,5 +92,6 @@ st.markdown(
 symptome= st.text_input("Décrivez les symptomes du patient :")
 antécédents= st.text_input("Le patient a-t-il des traitements si oui lesquels ?")
 
-if st.button("envoyez
+if st.button("envoyez"):
+    st.write("envoyez")
    
