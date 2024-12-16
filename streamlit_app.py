@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 liste_mesure=["IMC","Taille","Poids"]
+step=[1,1,1]
+min=[5,5,1]
+max=[50,300,400]
 st.markdown(
     """
     <div style="text-align: center; color:#00561b; font-size: 50px; font-weight: bold;">
@@ -54,7 +57,7 @@ for i in range(n):
         v[i] = st.checkbox(liste_mesure[i],v[i])
 for i in range(n):
     if v[i]== True :
-        r[i] = st.number_input(liste_mesure[i], min_value=0.0, max_value=500.0, step=0.1)
+        r[i] = st.number_input(liste_mesure[i], min_value=min[i], max_value=max[i], step=step[i])
         
         
     
