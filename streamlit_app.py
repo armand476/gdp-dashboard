@@ -5,6 +5,23 @@ liste_mesure=["IMC","Taille","Poids"]
 step=[1,1,1]
 min=[5,5,1]
 max=[50,300,400]
+image_url = "https://github.com/bellerophon2024/image/blob/main/minimalist-photorealistic-desert-road.jpg?raw=true"  # Remplace par ton URL réelle
+
+# Ajouter l'image en tant que fond
+st.markdown(
+    f"""
+    <style>
+    div.stApp {{
+        background-image: url("{image_url}");
+        background-size: cover; /* Ajuste l'image pour couvrir tout */
+        background-position: center; /* Centre l'image */
+        background-repeat: no-repeat; /* Empêche la répétition */
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.markdown(
     """
     <div style="text-align: center; color:#00561b; font-size: 50px; font-weight: bold;">
@@ -73,4 +90,6 @@ st.markdown(
 )
 symptome= st.text_input("Décrivez les symptomes du patient :")
 antécédents= st.text_input("Le patient a-t-il des traitements si oui lesquels ?")
+
+if st.button("envoyez
    
