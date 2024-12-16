@@ -45,12 +45,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 n=len(liste_mesure)
+#st.session_state['mesure']= [False] * n
 v= [False] * n
 r= [None] * n
 colmesure=st.columns(n)
 for i in range(n):
     with colmesure[i]:
-        r[i] = st.checkbox(liste_mesure[i],v[i])
+        v[i] = st.checkbox(liste_mesure[i],v[i])
 for i in range(n):
     if v[i]== True :
         r[i] = st.number_input(liste_mesure[i], min_value=0.0, max_value=500.0, step=0.1)
