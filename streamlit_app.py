@@ -9,10 +9,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-température = st.selectbox(
-        "Température", 
-        options= np.arange(35, 45, 0.1).tolist()
-    )
+température = st.number_input("Température :", min_value=35, max_value=45, step=0.1)
 age = st.selectbox(
         "Age", 
         options=np.arange(0, 130, 1).tolist()
