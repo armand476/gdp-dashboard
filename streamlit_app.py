@@ -1,21 +1,39 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import json
+image_url = "https://raw.githubusercontent.com/USERNAME/REPOSITORY/BRANCH/images/background.jpg"
+
+# Ajouter l'image en fond
+st.markdown(
+    f"""
+    <style>
+    div.stApp {{
+        background-image: url({image_url});
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 liste_mesure=["IMC","Taille","Poids"]
 step=[1,1,1]
 min=[5,5,1]
 max=[50,300,400]
-image_url = "https://github.com/bellerophon2024/image/blob/main/minimalist-photorealistic-desert-road.jpg?raw=true"  # Remplace par ton URL réelle
 
-# Ajouter l'image en tant que fond
+image_url = "https://raw.githubusercontent.com/USERNAME/REPOSITORY/BRANCH/images/background.jpg"
+
+# Ajouter l'image en fond
 st.markdown(
     f"""
     <style>
     div.stApp {{
         background-image: url("{image_url}");
-        background-size: cover; /* Ajuste l'image pour couvrir tout */
-        background-position: center; /* Centre l'image */
-        background-repeat: no-repeat; /* Empêche la répétition */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }}
     </style>
     """,
