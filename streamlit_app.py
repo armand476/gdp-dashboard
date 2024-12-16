@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+liste_mesure=["IMC","Taille","Poids"]
 st.markdown(
     """
     <div style="text-align: center; color:#00561b; font-size: 50px; font-weight: bold;">
@@ -35,7 +36,27 @@ with cols[0]:
 with cols[1]:
     t2 = st.number_input("Tension diastollique :", min_value=0, max_value=300, step=1)   
 st.markdown("<hr style='border:1px solid black;'>", unsafe_allow_html=True)
-
+st.markdown(
+    """
+    <div style="text-align: center;text-decoration:underline;font-size:20px;">
+       Mesures Réalisées :
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+n=len(liste_mesure)
+v= [False] * n
+r= [None] * n
+colmesure=st.columns(n)
+for i in range(n):
+    with colmesure[i]:
+        r[i] = st.checkbox(liste_mesure[i],v[i])
+for i in range(n):
+    if v[i]== True :
+        r[i] = st.number_input(liste_mesure[i], min_value=0.0, max_value=500.0, step=0.1)
+        
+        
+    
 symptome= st.text_input("Autres mesures :")
 st.markdown("<hr style='border:1px solid black;'>", unsafe_allow_html=True)
 st.markdown(
