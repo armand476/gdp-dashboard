@@ -112,20 +112,21 @@ st.markdown(
 )
 symptome= st.text_input("Décrivez les symptomes du patient :")
 antécédents= st.text_input("Le patient a-t-il des traitements si oui lesquels ?")
+st.write(st.session_state['question'])
 for i in range(len(st.session_state['question'])):
     st.session_state['réponse'][i]= st.text_input(st.session_state['question'][i])
 
 if st.button("Envoyez"):
     st.write("envoyez")
     texte="Tu mettras entre guillement toute les questions que tu as"
-    completion = client.chat.completions.create(
+    '''completion = client.chat.completions.create(
     model="grok-beta",
     messages=[
         {"role": "system", "content": "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."},
         {"role": "user", "content": "Explain the risks of improper AI usage and its contribution to autocratic regimes."},
     ],
-)    
-    st.write(completion.choices[0].message.content)
+)    '''
+    #st.write(completion.choices[0].message.content)
     response='Voici "la première phrase", puis "la seconde phrase", et enfin "une dernière phrase".'
     l= re.findall(r'"(.*?)"', response)
     st.session_state['question']=st.session_state['question']+l
