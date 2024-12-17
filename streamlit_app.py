@@ -138,7 +138,7 @@ if st.button("Envoyez"):
             st.session_state['réponse'].append("")
 st.write(f"Diagnostique de l'IA :{diagnostique}"
 if (len(diagnostique)==1):
-st.write(f"Diagnostique de l'IA :{diagnostique[0]}"
+    st.write(f"Diagnostique de l'IA :{diagnostique[0]}"
 st.write(st.session_state['question'])
 for i in range(len(st.session_state['question'])):
     st.session_state['réponse'][i]= st.text_input(st.session_state['question'][i], key=f"question{i}")
