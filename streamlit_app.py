@@ -7,11 +7,12 @@ import requests
 import os
 from openai import OpenAI
 image_url = "https://github.com/armand476/gdp-dashboard/blob/main/Download%20Doctor%20Johnny%20Sins%20Wallpaper%20_%20Wallpapers_com.jpg?raw=true"
-st.session_state['question']=[]
-st.session_state['réponse']=[]
+if not 'question' in st.session_state:
+    st.session_state['question']=[]
+    st.session_state['réponse']=[]
 if st.button("Réinitialisez conversation"):
     st.session_state['question']=[]
-
+    st.session_state['réponse']=[]
 # Configurer la clé API comme variable d'environnement
 os.environ["XAI_API_KEY"] = "xai-gZAc0yZ9WhUSWPIlxkdgLDWLor2O2I1xpN48yGFM9QOWrKrilgBFlA8OFXTWJ8UzsGu1JdV1cuQPBccQ"
 
