@@ -11,6 +11,7 @@ image_url = "https://github.com/armand476/gdp-dashboard/blob/main/Download%20Doc
 if not 'question' in st.session_state:
     st.session_state['question']=[]
     st.session_state['réponse']=[]
+    st.session_state['conversation']=[]
 if st.button("Réinitialisez conversation"):
     st.session_state['question']=[]
     st.session_state['réponse']=[]
@@ -24,6 +25,15 @@ client = OpenAI(
 )
 
 # Faire une requête à l'API Grok
+
+
+# Premier appel à l'API
+def make_api_call(messages):
+    completion = client.chat.completions.create(
+        model="grok-beta",
+        messages=messages,
+    )
+    return completion.choices[0].message.content
 
 
 
@@ -120,35 +130,30 @@ colls=st.columns([2,1,2])
 
 with colls[1]:
     if st.button("Envoyez"):
-        for i in range(len(liste_mesure)):
-            s=""
-            if v[i]== True :
-                s=s+f"-{liste_mesure[i]} : {r[i]} "
-        texte=f'A la suite d’un examen médical effectué par une infirmière sur un patient, j’aurais besoin que tu me donnes un diagnostic de ce patient. Pour cela, je vais te fournir ses caractéristiques, ses résultats d’examen, ses symptômes et ses antécédents. Essaye de me fournir le diagnostic le plus précis possible. Caractéristiques : {s} -	Age : {age} Résultats examens : -	Température : {température} -	Saturation d’oxygène : {sat} -	Fréquence cardiaque : {fc} -	Tension systolique : {t1} -	Tension diastolique : {t2} -	Autres mesures : {autres_mesures} Symptômes : {symptome} Antécédents : {antécédents} Concernant l’annonce du diagnostic final, deux possibilités : -	Tu es sûr de ton résultat à plus de 90%, dans ce cas : tu donnes le diagnostic final. Exemple du format pour donner le diagnostic final (les crochets sont à mettre) : [Pneumonie aigue] -	Tu n’es pas sûr de ton résultat à plus de 90%, dans ce cas : tu as le droit de poser des questions ou demander à faire des examens complémentaires (ils doivent pouvoir être réalisables par une infirmière). Je te donne un exemple du format des examens supplémentaires/questions (bien mettre entre guillemet) : « Le patient fume-t-il ? » « Effectuer un contrôle de la respiration du patient ». Tu as le droit à autant de questions ou d’examens supplémentaires.'
-        completion = client.chat.completions.create(
-        model="grok-beta",
-        messages=[
-            {"role": "system", "content": "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."},
-            {"role": "user", "content": texte},
-        ],
-        )    
-        st.write(completion.choices[0].message.content)
-        response=completion.choices[0].message.content
+        if st.session_state['conversation']!=[]:
+            t=""
+            for i in range(len(st.session_state['question']))
+                t= t+ f" réponse à la question : {st.session_state['question'][i]} : {st.session_state['réponse'][i]}"
+            st.session_state['conversation'].append({"role": "user", "content":response})
+        else :
+            for i in range(len(liste_mesure)):
+                s=""
+                if v[i]== True :
+                    s=s+f"-{liste_mesure[i]} : {r[i]} "
+            texte=f'A la suite d’un examen médical effectué par une infirmière sur un patient, j’aurais besoin que tu me donnes un diagnostic de ce patient. Pour cela, je vais te fournir ses caractéristiques, ses résultats d’examen, ses symptômes et ses antécédents. Essaye de me fournir le diagnostic le plus précis possible. Caractéristiques : {s} -	Age : {age} Résultats examens : -	Température : {température} -	Saturation d’oxygène : {sat} -	Fréquence cardiaque : {fc} -	Tension systolique : {t1} -	Tension diastolique : {t2} -	Autres mesures : {autres_mesures} Symptômes : {symptome} Antécédents : {antécédents} Concernant l’annonce du diagnostic final, deux possibilités : -	Tu es sûr de ton résultat à plus de 90%, dans ce cas : tu donnes le diagnostic final. Exemple du format pour donner le diagnostic final (les crochets sont à mettre) : [Pneumonie aigue] -	Tu n’es pas sûr de ton résultat à plus de 90%, dans ce cas : tu as le droit de poser des questions ou demander à faire des examens complémentaires (ils doivent pouvoir être réalisables par une infirmière). Je te donne un exemple du format des examens supplémentaires/questions (bien mettre entre guillemet) : « Le patient fume-t-il ? » « Effectuer un contrôle de la respiration du patient ». Tu as le droit à autant de questions ou d’examens supplémentaires.'
+            st.session_state['conversation']= [
+    {"role": "system", "content": "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."},
+    {"role": "user", "content": texte},
+]
+        response=make_api_call(st.session_state['conversation'])
+        st.session_state['conversation'].append({"role": "assistant", "content":response})
         #response='Voici "la première phrase", puis "la seconde phrase", et[connerie] enfin "une dernière phrase".'
         l= re.findall(r'«(.*?)»', response)
         diagnostique= re.findall(r'\[(.*?)\]', response)
         st.session_state['question']=st.session_state['question']+l
         #st.write(st.session_state['question'])
         #st.write(st.session_state['réponse'])
-        completion = client.chat.completions.create(
-        model="grok-beta",
-        messages=[
-            {"role": "system", "content": "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."},
-            {"role": "user", "content": "as-tu des pistes?"},
-        ],
-        )    
-        st.write(completion.choices[0].message.content)
-
+        
         if (len(st.session_state['question'])>len(st.session_state['réponse'])):
             for i in range((len(st.session_state['question'])-len(st.session_state['réponse']))):
                 st.session_state['réponse'].append("")
