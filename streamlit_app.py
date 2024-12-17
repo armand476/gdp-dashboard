@@ -116,7 +116,7 @@ st.markdown(
 symptome= st.text_input("Décrivez les symptomes du patient :")
 antécédents= st.text_input("Le patient a-t-il des traitements si oui lesquels ?")
 
-colls=st.columns([2,1,1])
+colls=st.columns([2,1,2])
 
 with colls[1]:
     if st.button("Envoyez"):
