@@ -136,5 +136,5 @@ if st.button("Envoyez"):
 
 st.write(st.session_state['question'])
 for i in range(len(st.session_state['question'])):
-    st.session_state['réponse'][i]= st.text_input(st.session_state['question'][i])
+    st.session_state['réponse'][i]= st.text_input(st.session_state['question'][i], key="question{i}")
    
