@@ -140,6 +140,15 @@ with colls[1]:
         st.session_state['question']=st.session_state['question']+l
         #st.write(st.session_state['question'])
         #st.write(st.session_state['réponse'])
+        completion = client.chat.completions.create(
+        model="grok-beta",
+        messages=[
+            {"role": "system", "content": "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."},
+            {"role": "user", "content": "as-tu des pistes?"},
+        ],
+        )    
+        st.write(completion.choices[0].message.content)
+
         if (len(st.session_state['question'])>len(st.session_state['réponse'])):
             for i in range((len(st.session_state['question'])-len(st.session_state['réponse']))):
                 st.session_state['réponse'].append("")
