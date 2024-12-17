@@ -4,14 +4,13 @@ import numpy as np
 import json
 import re
 import requests
+import os
+from openai import OpenAI
 image_url = "https://github.com/armand476/gdp-dashboard/blob/main/Download%20Doctor%20Johnny%20Sins%20Wallpaper%20_%20Wallpapers_com.jpg?raw=true"
 st.session_state['question']=[]
 st.session_state['réponse']=[]
 if st.button("Réinitialisez conversation"):
     st.session_state['question']=[]
-
-import os
-from openai import OpenAI  # Notez que Grok peut utiliser le SDK d'OpenAI
 
 # Configurer la clé API comme variable d'environnement
 os.environ["XAI_API_KEY"] = "xai-gZAc0yZ9WhUSWPIlxkdgLDWLor2O2I1xpN48yGFM9QOWrKrilgBFlA8OFXTWJ8UzsGu1JdV1cuQPBccQ"
@@ -23,16 +22,8 @@ client = OpenAI(
 )
 
 # Faire une requête à l'API Grok
-completion = client.chat.completions.create(
-    model="grok-beta",
-    messages=[
-        {"role": "system", "content": "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."},
-        {"role": "user", "content": "Explain the risks of improper AI usage and its contribution to autocratic regimes."},
-    ],
-)
 
-# Afficher la réponse
-st.write(completion.choices[0].message.content)
+
 
 
 st.markdown(
@@ -127,6 +118,14 @@ for i in range(len(st.session_state['question'])):
 if st.button("Envoyez"):
     st.write("envoyez")
     texte="Tu mettras entre guillement toute les questions que tu as"
+    completion = client.chat.completions.create(
+    model="grok-beta",
+    messages=[
+        {"role": "system", "content": "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."},
+        {"role": "user", "content": "Explain the risks of improper AI usage and its contribution to autocratic regimes."},
+    ],
+)    
+    st.write(completion.choices[0].message.content)
     response='Voici "la première phrase", puis "la seconde phrase", et enfin "une dernière phrase".'
     l= re.findall(r'"(.*?)"', response)
     st.session_state['question']=st.session_state['question']+l
