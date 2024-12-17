@@ -32,7 +32,7 @@ completion = client.chat.completions.create(
 )
 
 # Afficher la réponse
-print(completion.choices[0].message.content)
+st.write(completion.choices[0].message.content)
 
 
 st.markdown(
