@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import json
+import re
 image_url = "https://github.com/armand476/gdp-dashboard/blob/main/Download%20Doctor%20Johnny%20Sins%20Wallpaper%20_%20Wallpapers_com.jpg?raw=true"
 st.session_state['question']=[]
 if st.button("Réinitialisez conversation"):
