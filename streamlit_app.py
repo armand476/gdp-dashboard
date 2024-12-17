@@ -129,8 +129,8 @@ if st.button("Envoyez"):
     #st.write(completion.choices[0].message.content)
     response='Voici "la première phrase", puis "la seconde phrase", et enfin "une dernière phrase".'
     l= re.findall(r'"(.*?)"', response)
-    st.session_state['question']
     st.session_state['question']=st.session_state['question']+l
+    st.write(st.session_state['question'])
     if (len(st.session_state['question'])>len(st.session_state['réponse'])):
         for i in range((len(st.session_state['question'])-len(st.session_state['réponse']))):
             st.session_state['réponse'].append("")
