@@ -116,27 +116,28 @@ st.markdown(
 symptome= st.text_input("Décrivez les symptomes du patient :")
 antécédents= st.text_input("Le patient a-t-il des traitements si oui lesquels ?")
 
+colls=st.columns(3)
 
-if st.button("Envoyez"):
-    st.write("envoyez")
-    texte="Tu mettras entre guillement toute les questions que tu as"
-    '''completion = client.chat.completions.create(
-    model="grok-beta",
-    messages=[
-        {"role": "system", "content": "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."},
-        {"role": "user", "content": "Explain the risks of improper AI usage and its contribution to autocratic regimes."},
-    ],
-)    '''
-    #st.write(completion.choices[0].message.content)
-    response='Voici "la première phrase", puis "la seconde phrase", et[connerie] enfin "une dernière phrase".'
-    l= re.findall(r'"(.*?)"', response)
-    diagnostique= re.findall(r'\[(.*?)\]', response)
-    st.session_state['question']=st.session_state['question']+l
-    #st.write(st.session_state['question'])
-    #st.write(st.session_state['réponse'])
-    if (len(st.session_state['question'])>len(st.session_state['réponse'])):
-        for i in range((len(st.session_state['question'])-len(st.session_state['réponse']))):
-            st.session_state['réponse'].append("")
+with colls[1]:
+    if st.button("Envoyez"):
+        texte="Tu mettras entre guillement toute les questions que tu as"
+        '''completion = client.chat.completions.create(
+        model="grok-beta",
+        messages=[
+            {"role": "system", "content": "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."},
+            {"role": "user", "content": "Explain the risks of improper AI usage and its contribution to autocratic regimes."},
+        ],
+    )    '''
+        #st.write(completion.choices[0].message.content)
+        response='Voici "la première phrase", puis "la seconde phrase", et[connerie] enfin "une dernière phrase".'
+        l= re.findall(r'"(.*?)"', response)
+        diagnostique= re.findall(r'\[(.*?)\]', response)
+        st.session_state['question']=st.session_state['question']+l
+        #st.write(st.session_state['question'])
+        #st.write(st.session_state['réponse'])
+        if (len(st.session_state['question'])>len(st.session_state['réponse'])):
+            for i in range((len(st.session_state['question'])-len(st.session_state['réponse']))):
+                st.session_state['réponse'].append("")
 #st.write(f"Diagnostique de l'IA :{diagnostique}")
 if (len(diagnostique)==1):
     st.write(f"Diagnostique de l'IA :{diagnostique[0]}")
