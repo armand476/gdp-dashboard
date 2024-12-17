@@ -8,21 +8,31 @@ st.session_state['question']=[]
 st.session_state['réponse']=[]
 if st.button("Réinitialisez conversation"):
     st.session_state['question']=[]
-# Ajouter l'image en fond
-from openai import OpenAI
 
+import os
+from openai import OpenAI  # Notez que Grok peut utiliser le SDK d'OpenAI
+
+# Configurer la clé API comme variable d'environnement
+os.environ["XAI_API_KEY"] = "xai-gZAc0yZ9WhUSWPIlxkdgLDWLor2O2I1xpN48yGFM9QOWrKrilgBFlA8OFXTWJ8UzsGu1JdV1cuQPBccQ"
+
+# Initialiser le client avec la clé API
 client = OpenAI(
-  api_key="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"
+    api_key=os.environ["XAI_API_KEY"],
+    base_url="https://api.x.ai/v1",
 )
 
+# Faire une requête à l'API Grok
 completion = client.chat.completions.create(
-  model="gpt-4o-mini",
-  messages=[
-    {"role": "user", "content": "write a haiku about ai"}
-  ]
+    model="grok-beta",
+    messages=[
+        {"role": "system", "content": "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."},
+        {"role": "user", "content": "Explain the risks of improper AI usage and its contribution to autocratic regimes."},
+    ],
 )
 
-print(completion.choices[0].message);
+# Afficher la réponse
+print(completion.choices[0].message.content)
+
 
 st.markdown(
     f"""
