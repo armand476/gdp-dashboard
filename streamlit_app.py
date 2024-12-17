@@ -72,6 +72,7 @@ with colage[1]:
         key="unité_age"
     )
 température = st.number_input("Température :", min_value=35.0, max_value=45.0, step=0.1)
+fc =  st.number_input("Fréquence cardiaque :", min_value=0, max_value=220, step=1)
 sat = st.number_input("Saturation d'oxygéne :", min_value=0.0, max_value=100.0, step=0.1)
 cols=st.columns(2)
 with cols[0]:
@@ -136,8 +137,8 @@ if st.button("Envoyez"):
         for i in range((len(st.session_state['question'])-len(st.session_state['réponse']))):
             st.session_state['réponse'].append("")
 st.write(f"Diagnostique de l'IA :{diagnostique}"
-if len(diagnostique)==1:
-    st.write(f"Diagnostique de l'IA :{diagnostique[0]}"
+if (len(diagnostique)==1):
+st.write(f"Diagnostique de l'IA :{diagnostique[0]}"
 st.write(st.session_state['question'])
 for i in range(len(st.session_state['question'])):
     st.session_state['réponse'][i]= st.text_input(st.session_state['question'][i], key=f"question{i}")
