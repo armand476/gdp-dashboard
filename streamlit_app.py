@@ -133,7 +133,8 @@ with colls[1]:
         ],
         )    
         st.write(completion.choices[0].message.content)
-        response='Voici "la première phrase", puis "la seconde phrase", et[connerie] enfin "une dernière phrase".'
+        response=completion.choices[0].message.content
+        #response='Voici "la première phrase", puis "la seconde phrase", et[connerie] enfin "une dernière phrase".'
         l= re.findall(r'"(.*?)"', response)
         diagnostique= re.findall(r'\[(.*?)\]', response)
         st.session_state['question']=st.session_state['question']+l
