@@ -134,7 +134,7 @@ with colls[1]:
             t=""
             for i in range(len(st.session_state['question'])) :
                 t= t+ f" réponse à la question : {st.session_state['question'][i]} : {st.session_state['réponse'][i]}"
-            st.session_state['conversation'].append({"role": "user", "content":response})
+            st.session_state['conversation'].append({"role": "user", "content": t})
         else :
             for i in range(len(liste_mesure)):
                 s=""
