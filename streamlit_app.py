@@ -113,9 +113,7 @@ st.markdown(
 )
 symptome= st.text_input("Décrivez les symptomes du patient :")
 antécédents= st.text_input("Le patient a-t-il des traitements si oui lesquels ?")
-st.write(st.session_state['question'])
-for i in range(len(st.session_state['question'])):
-    st.session_state['réponse'][i]= st.text_input(st.session_state['question'][i])
+
 
 if st.button("Envoyez"):
     st.write("envoyez")
@@ -135,5 +133,8 @@ if st.button("Envoyez"):
     if (len(st.session_state['question'])>len(st.session_state['réponse'])):
         for i in range((len(st.session_state['question'])-len(st.session_state['réponse']))):
             st.session_state['réponse'].append("")
-    
+
+st.write(st.session_state['question'])
+for i in range(len(st.session_state['question'])):
+    st.session_state['réponse'][i]= st.text_input(st.session_state['question'][i])
    
