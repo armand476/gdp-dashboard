@@ -132,7 +132,7 @@ with colls[1]:
     if st.button("Envoyez"):
         if st.session_state['conversation']!=[]:
             t=""
-            for i in range(len(st.session_state['question']))
+            for i in range(len(st.session_state['question'])) :
                 t= t+ f" réponse à la question : {st.session_state['question'][i]} : {st.session_state['réponse'][i]}"
             st.session_state['conversation'].append({"role": "user", "content":response})
         else :
