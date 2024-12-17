@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import json
-image_url = "https://raw.githubusercontent.com/USERNAME/REPOSITORY/BRANCH/images/background.jpg"
+image_url = "https://github.com/bellerophon2024/image/blob/main/minimalist-photorealistic-desert-road.jpg?raw=true"
 st.session_state['question']=[]
 if st.button("Réinitialisez conversation"):
     st.session_state['question']=[]
