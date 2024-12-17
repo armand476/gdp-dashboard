@@ -126,8 +126,9 @@ if st.button("Envoyez"):
     ],
 )    '''
     #st.write(completion.choices[0].message.content)
-    response='Voici "la première phrase", puis "la seconde phrase", et enfin "une dernière phrase".'
+    response='Voici "la première phrase", [] puis "la seconde phrase", et enfin "une dernière phrase".'
     l= re.findall(r'"(.*?)"', response)
+    diagnostique= re.findall(r'\[(.*?)\]', texte)
     st.session_state['question']=st.session_state['question']+l
     st.write(st.session_state['question'])
     st.write(st.session_state['réponse'])
