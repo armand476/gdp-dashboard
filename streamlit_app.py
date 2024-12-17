@@ -100,7 +100,7 @@ for i in range(n):
         
         
     
-symptome= st.text_input("Autres mesures :")
+autres_mesures= st.text_input("Autres mesures :")
 st.markdown("<hr style='border:1px solid black;'>", unsafe_allow_html=True)
 st.markdown(
     """
