@@ -6,6 +6,7 @@ import re
 import requests
 import os
 from openai import OpenAI
+diagnostique=[]
 image_url = "https://github.com/armand476/gdp-dashboard/blob/main/Download%20Doctor%20Johnny%20Sins%20Wallpaper%20_%20Wallpapers_com.jpg?raw=true"
 if not 'question' in st.session_state:
     st.session_state['question']=[]
