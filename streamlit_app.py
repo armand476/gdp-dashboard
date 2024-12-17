@@ -5,6 +5,7 @@ import json
 import re
 image_url = "https://github.com/armand476/gdp-dashboard/blob/main/Download%20Doctor%20Johnny%20Sins%20Wallpaper%20_%20Wallpapers_com.jpg?raw=true"
 st.session_state['question']=[]
+st.session_state['réponse']=[]
 if st.button("Réinitialisez conversation"):
     st.session_state['question']=[]
 # Ajouter l'image en fond
