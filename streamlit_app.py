@@ -148,6 +148,7 @@ with colls[1]:
         response=make_api_call(st.session_state['conversation'])
         st.session_state['conversation'].append({"role": "assistant", "content":response})
         #response='Voici "la première phrase", puis "la seconde phrase", et[connerie] enfin "une dernière phrase".'
+        st.write(response)
         l= re.findall(r'«(.*?)»', response)
         diagnostique= re.findall(r'\[(.*?)\]', response)
         st.session_state['question']=st.session_state['question']+l
