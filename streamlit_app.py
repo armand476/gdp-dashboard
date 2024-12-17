@@ -3,7 +3,8 @@ import pandas as pd
 import numpy as np
 import json
 image_url = "https://raw.githubusercontent.com/USERNAME/REPOSITORY/BRANCH/images/background.jpg"
-
+if st.button("Réinitialisez conversation"):
+    st.session_state['question']=[]
 # Ajouter l'image en fond
 st.markdown(
     f"""
@@ -91,7 +92,17 @@ st.markdown(
 )
 symptome= st.text_input("Décrivez les symptomes du patient :")
 antécédents= st.text_input("Le patient a-t-il des traitements si oui lesquels ?")
+for i in range(len(st.session_state['question'])):
+    st.session_state['réponse'][i]= st.text_input(st.session_state['question'][i])
 
-if st.button("envoyez"):
+if st.button("Envoyez"):
     st.write("envoyez")
+    texte="Tu mettras entre guillement toute les questions que tu as"
+    response='Voici "la première phrase", puis "la seconde phrase", et enfin "une dernière phrase".'
+    l= re.findall(r'"(.*?)"', response)
+    st.session_state['question']=st.session_state['question']+l
+    if (len(st.session_state['question'])>len(st.session_state['réponse'])):
+        for i in range((len(st.session_state['question'])-len(st.session_state['réponse'])):
+            st.session_state['réponse'].append("")
+    
    
