@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import json
 image_url = "https://raw.githubusercontent.com/USERNAME/REPOSITORY/BRANCH/images/background.jpg"
+st.session_state['question']=[]
 if st.button("Réinitialisez conversation"):
     st.session_state['question']=[]
 # Ajouter l'image en fond
