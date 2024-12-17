@@ -9,6 +9,21 @@ st.session_state['réponse']=[]
 if st.button("Réinitialisez conversation"):
     st.session_state['question']=[]
 # Ajouter l'image en fond
+from openai import OpenAI
+
+client = OpenAI(
+  api_key="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"
+)
+
+completion = client.chat.completions.create(
+  model="gpt-4o-mini",
+  messages=[
+    {"role": "user", "content": "write a haiku about ai"}
+  ]
+)
+
+print(completion.choices[0].message);
+
 st.markdown(
     f"""
     <style>
