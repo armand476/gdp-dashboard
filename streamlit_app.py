@@ -154,7 +154,7 @@ with colls[1]:
         l= re.findall(r'«(.*?)»', response)+re.findall(r'"(.*?)"', response)
         diagnostique= re.findall(r'\[(.*?)\]', response)
         traitement=re.findall(r'\+(.*?)\+', response)
-        st.write(response)
+        #st.write(response)
         st.session_state['question']=st.session_state['question']+l
         #st.write(st.session_state['question'])
         #st.write(st.session_state['réponse'])
@@ -180,8 +180,8 @@ if (len(diagnostique)==1):
     """,
     unsafe_allow_html=True
 )
-    st.write(f"Diagnostique de l'IA :{diagnostique[0]}")
-    st.write(f"Traitements/Conseils : {traitement[0]}")
+    #st.write(f"Diagnostique de l'IA :{diagnostique[0]}")
+    #st.write(f"Traitements/Conseils : {traitement[0]}")
 #st.write(st.session_state['question'])
 for i in range(len(st.session_state['question'])):
     st.session_state['réponse'][i]= st.text_input(st.session_state['question'][i], key=f"question{i}")
