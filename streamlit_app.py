@@ -15,6 +15,7 @@ if not 'question' in st.session_state:
 if st.button("Réinitialisez conversation"):
     st.session_state['question']=[]
     st.session_state['réponse']=[]
+    st.session_state['conversation']=[]
 # Configurer la clé API comme variable d'environnement
 os.environ["XAI_API_KEY"] = "xai-gZAc0yZ9WhUSWPIlxkdgLDWLor2O2I1xpN48yGFM9QOWrKrilgBFlA8OFXTWJ8UzsGu1JdV1cuQPBccQ"
 
