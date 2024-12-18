@@ -16,6 +16,7 @@ if st.button("Réinitialisez conversation"):
     st.session_state['question']=[]
     st.session_state['réponse']=[]
     st.session_state['conversation']=[]
+précision=st.number_input("Précision en % :", min_value=0, max_value=100, step=1, value =90)
 # Configurer la clé API comme variable d'environnement
 os.environ["XAI_API_KEY"] = "xai-gZAc0yZ9WhUSWPIlxkdgLDWLor2O2I1xpN48yGFM9QOWrKrilgBFlA8OFXTWJ8UzsGu1JdV1cuQPBccQ"
 
@@ -141,7 +142,7 @@ with colls[1]:
                 s=""
                 if v[i]== True :
                     s=s+f"-{liste_mesure[i]} : {r[i]} "
-            texte=f'A la suite d’un examen médical effectué par une infirmière sur un patient, j’aurais besoin que tu me donnes un diagnostic de ce patient. Pour cela, je vais te fournir ses caractéristiques, ses résultats d’examen, ses symptômes et ses antécédents. Essaye de me fournir le diagnostic le plus précis possible. Caractéristiques : {s} -	Age : {age} Résultats examens : -	Température : {température} -	Saturation d’oxygène : {sat} -	Fréquence cardiaque : {fc} -	Tension systolique : {t1} -	Tension diastolique : {t2} -	Autres mesures : {autres_mesures} Symptômes : {symptome} Antécédents : {antécédents} Concernant l’annonce du diagnostic final, deux possibilités : -	Tu es sûr de ton résultat à plus de 90%, dans ce cas : tu donnes le diagnostic final. Exemple du format pour donner le diagnostic final (les crochets sont à mettre) : [Pneumonie aigue] -	Tu n’es pas sûr de ton résultat à plus de 90%, dans ce cas : tu as le droit de poser des questions ou demander à faire des examens complémentaires (ils doivent pouvoir être réalisables par une infirmière  qui possède uniquement une machine d’analyse SEAMATY SD1). Je te donne un exemple du format des examens supplémentaires/questions (bien mettre entre guillemet) : « Le patient fume-t-il ? » « Effectuer un contrôle de la respiration du patient ». Tu as le droit à autant de questions ou d’examens supplémentaires.'
+            texte=f'A la suite d’un examen médical effectué par une infirmière sur un patient, j’aurais besoin que tu me donnes un diagnostic de ce patient. Pour cela, je vais te fournir ses caractéristiques, ses résultats d’examen, ses symptômes et ses antécédents. Essaye de me fournir le diagnostic le plus précis possible. Caractéristiques : {s} -	Age : {age} Résultats examens : -	Température : {température} -	Saturation d’oxygène : {sat} -	Fréquence cardiaque : {fc} -	Tension systolique : {t1} -	Tension diastolique : {t2} -	Autres mesures : {autres_mesures} Symptômes : {symptome} Antécédents : {antécédents} Concernant l’annonce du diagnostic final, deux possibilités : -	Tu es sûr de ton résultat à plus de {précision}%, dans ce cas : tu donnes le diagnostic final. Exemple du format pour donner le diagnostic final (les crochets sont à mettre) : [Pneumonie aigue] tu rajouteras les traitements (médicament + conseil) à prendre dans ce cas. Exemple de format pour donner les traitements/conseils (les plus sont à mettre): +Paracetamol 3 fois par jour en dose de 500mg et éviter de sortir dehors+ -	Tu n’es pas sûr de ton résultat à plus de {précision}%, dans ce cas : tu as le droit de poser des questions ou demander à faire des examens complémentaires (ils doivent pouvoir être réalisables par une infirmière  qui possède uniquement une machine d’analyse SEAMATY SD1). Je te donne un exemple du format des examens supplémentaires/questions (bien mettre entre guillemet) : « Le patient fume-t-il ? » « Effectuer un contrôle de la respiration du patient ». Tu as le droit à autant de questions ou d’examens supplémentaires.'
             st.session_state['conversation']= [
     {"role": "system", "content": "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."},
     {"role": "user", "content": texte},
@@ -152,6 +153,7 @@ with colls[1]:
         #st.write(response)
         l= re.findall(r'«(.*?)»', response)+re.findall(r'"(.*?)"', response)
         diagnostique= re.findall(r'\[(.*?)\]', response)
+        traitement=re.findall(r'+(.*?)+', response)
         st.session_state['question']=st.session_state['question']+l
         #st.write(st.session_state['question'])
         #st.write(st.session_state['réponse'])
@@ -162,6 +164,7 @@ with colls[1]:
 #st.write(f"Diagnostique de l'IA :{diagnostique}")
 if (len(diagnostique)==1):
     st.write(f"Diagnostique de l'IA :{diagnostique[0]}")
+    st.write(f"Traitements/Conseils : {traitement})
 #st.write(st.session_state['question'])
 for i in range(len(st.session_state['question'])):
     st.session_state['réponse'][i]= st.text_input(st.session_state['question'][i], key=f"question{i}")
