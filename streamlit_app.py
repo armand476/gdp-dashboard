@@ -149,7 +149,7 @@ with colls[1]:
         st.session_state['conversation'].append({"role": "assistant", "content":response})
         #response='Voici "la première phrase", puis "la seconde phrase", et[connerie] enfin "une dernière phrase".'
         st.write(response)
-        l= re.findall(r'«(.*?)»', response)
+        l= re.findall(r'«(.*?)»', response)+re.findall(r'"(.*?)"', response)
         diagnostique= re.findall(r'\[(.*?)\]', response)
         st.session_state['question']=st.session_state['question']+l
         #st.write(st.session_state['question'])
