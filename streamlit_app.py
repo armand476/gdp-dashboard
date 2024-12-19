@@ -7,7 +7,7 @@ import requests
 import os
 from openai import OpenAI
 diagnostique=[]
-image_url = "https://github.com/armand476/gdp-dashboard/blob/main/466067293_1252698352657151_6737581024295831726_n.jpg?raw=true"
+image_url = "https://github.com/armand476/gdp-dashboard/blob/main/466752090_1760518448072353_200445483726230650_n.jpg?raw=true"
 if not 'question' in st.session_state:
     st.session_state['question']=[]
     st.session_state['réponse']=[]
