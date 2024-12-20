@@ -75,7 +75,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.write("aaa")
 colage=st.columns(2)
 with colage[0]:
     age =  st.number_input("Age :", min_value=0, max_value=150, step=1)
